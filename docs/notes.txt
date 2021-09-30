@@ -1,0 +1,14 @@
+Electron.js Aplicaciones de Escritorio con HTML, Javascript y Node
+min: 0:00
+
+- Init Project
+Electron\products-app>npm init --yes
+
+- Install
+npm i electron
+
+- Package
+"start": "electron src/index.js"
+
+- Run
+npm start
