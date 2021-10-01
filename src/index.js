@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
 const url = require('url');
 const path = require('path');
@@ -13,7 +13,12 @@ let mainWindow;
 let newProductWindow;
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true,
+    },
+  });
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, 'views/index.html'),
@@ -48,6 +53,10 @@ function createNewProductWindow() {
     newProductWindow = null;
   });
 }
+
+ipcMain.on('product:new', (e, newProduct) => {
+  console.log(newProduct);
+});
 
 const templateMenu = [
   {
